@@ -1,0 +1,28 @@
+sever:
+  8080
+spring:
+  application:
+    name: reggie_program
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      password: 3320248hm
+      username: root
+      url: jdbc:mysql://localhost:3306/reggie?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+  cache:
+    redis:
+      time-to-live: 18000000
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: ASSIGN_ID
+reggie:
+  path: D:\image\
+
