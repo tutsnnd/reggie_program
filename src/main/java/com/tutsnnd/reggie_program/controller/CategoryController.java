@@ -18,8 +18,6 @@ import java.util.List;
 @RestController
 public class CategoryController {
 
-    @Autowired
-    private CacheManager cacheManager;
 
     @Autowired
     private CategoryService categoryService;
@@ -52,10 +50,15 @@ public class CategoryController {
         return R.success("修改成功");
     }
     @GetMapping("/list")
-    public R<List<Category>> list (@RequestParam int type){
-
+    public R<List<Category>> list (Category category){
+        if (category.getType()==null){
+            LambdaQueryWrapper<Category> lambdaQueryWrapper = new LambdaQueryWrapper<Category>()
+                    .eq(Category::getType,1);
+            List<Category> categoryList = categoryService.list(lambdaQueryWrapper);
+            return R.success(categoryList);
+        }
         LambdaQueryWrapper<Category> lambdaQueryWrapper = new LambdaQueryWrapper<Category>()
-                .eq(Category::getType,type);
+                .eq(Category::getType,category.getType());
         List<Category> categoryList = categoryService.list(lambdaQueryWrapper);
 
         return R.success(categoryList);
